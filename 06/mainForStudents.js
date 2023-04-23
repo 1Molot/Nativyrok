@@ -80,21 +80,21 @@ const superUser = {
 // NB!!! Все преобразования выполняем иммьютабельно, если не сказано иное
 
 // 1. Создайте полную (глубокую) копию объекта user
-// let deepCopyUser = {...user,friends:[...user.friends]}
-// console.log(deepCopyUser)
+let deepCopyUser = {...user,friends:[...user.friends]}
+console.log(deepCopyUser)
 
 //2. Создайте полную (глубокую) массива students
-// let deepCopyStudents= students.map(el=>el ({...el}))
-// console.log(deepCopyStudents)
+let deepCopyStudents= students.map(el=>el ({...el}))
+console.log(deepCopyStudents)
 //
 // //3. Создайте полную (глубокую) копию объекта superUser
-// let deepCopySuperUser = {...superUser,friends:superUser.friends.map(el => ({...el}))}
-// console.log(deepCopySuperUser)
+let deepCopySuperUser = {...superUser,friends:superUser.friends.map(el => ({...el}))}
+console.log(deepCopySuperUser)
 
 //4. Отсортируйте students по успеваемости (лучший идёт первым)(sort)
 let sortedByScores = [...students].sort((a,b) => b.scores - a.scores)
-console.log(students.sort(sortedByScores));
-// console.log(students.sort((a,b) => a.scores.LocaleCompare(b.scores)))
+// console.log(students.sort(sortedByScores));
+console.log(students.sort((a,b) => a.scores.LocaleCompare(b.scores)))
 // console.log(students.sort((a, b) => a.scores.LocaleCompare(b.scores)))
 
 //5. Сформируйте массив студентов, у которых 100 и более баллов (filter)

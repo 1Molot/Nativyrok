@@ -1,111 +1,125 @@
-const td_1 = "qw-34"
-const td_2 = "uy-87"
+const names = ['Donald', 'Alex', 'Bob']
+console.log(names.sort())
+//1.сортирует строки из коробки
+//метод sort не создает новых массивов,сортирует и вовзвращает новую длинну массива
+const names_2 = ['Donald', 'alex', 'aLEX', 'игорь', 'Юрий']
+console.log(names_2.sort())
+//2.сортировка строки типа по алфавиту(за главные и английские первые)(unicode)
+console.log(names)
+//3.работает мутабельно (сортирует массив на месте)
+console.log(names.sort() === names)   //(true)
+//4.Возвращает ссылку на исходный массив
 
-
-const todoLists = [
-    {
-        id: td_1,
-        title: "What to learn",
-        filter: "all",
-    },
-    {
-        id: td_2,
-        title: "What to buy",
-        filter: "all",
+const nums = [1000, 333, 9999, 77, -3]  //числа сортировать не может,сортирует по (unicode)(unicode-таблица)
+console.log(nums.sort())
+//5. Для остальных случаев необходимо передать функцию (callback)
+const compFunc = (a, b) => {  // по возрастанию
+    if (a > b) {  //надо поменять местами,>0
+        return 10  //сравнивается с нулем,математика
+    } else {
+        return -1
     }
-]
-
-const tasks = {
-    [td_1]: [
-        {id: 1, title: "HTML", isDone: false},
-        {id: 2, title: "CSS", isDone: false},
-        {id: 3, title: "JS/TS", isDone: false},
-    ],
-    [td_2]: [
-        {id: 4, title: "Bread", isDone: false},
-        {id: 5, title: "Milk", isDone: false},
-        {id: 6, title: "Chicken", isDone: false},
-    ]
 }
-console.log(tasks[td_1])
-console.log(tasks[td_1].filter(t => t.id !== 2))
-console.log([...tasks[td_1], {id: 10, title: "New task", isDone: false}])
-const addTodoList = (title) => {
-    const td_id = "wh-21"
-    const newTodo = {
-        id: td_id,
-        title: title,
-        filter: "all"
-    }
-    const updatedTodos = [...todoLists, newTodo]
-    console.log(updatedTodos)
-    const copyTasks = {[td_id]: [], ...tasks}
-    console.log(copyTasks)
-}
-
-addTodoList("What to drink tonight")
-
-const array = [2, 3, 5, 3]
-
-// const result = array.reduce((acc, el) => {
-//     return acc + el
-// }, 0)
-const result = array.reduce((acc, el) => acc + el, 0) //короткий вариант
-// 0, 2 => 2
-// 2, 4 =>6
-// 6, 5 => 11
-// 11,3 => 14
-// 14
-
-// const max = array.reduce((acc, el) => {
-//     if (acc >= el) {
-//         return acc
-//     } else {
-//         return el
-//     }
-// })
-const max = array.reduce((acc, el) => acc >= el ? acc : el) //короткий вариант
-
-// 2, 4 => 4
-// 4, 5 => 5
-// 5, 3 => 5
-// => 5
-
-let students = [
+// const compFunc = (a, b) => a - b //Джедайская форма
+// console.log(nums.sort(a,b) => a - b ) без реверса
+// console.log(nums.sort(a,b) => a - b ).reverse()) c реверсом сорт
+console.log(nums.sort(compFunc)) //[-3, 77, 333, 1000, 9999]
+console.log(nums.reverse())    //разворачивает массив
+//6.Функция сравнения должна возвращать число больше или меньшее 0
+//7.В месте с sort часто используется revers
+const students = [
     {
-        id: 1,
         name: "Bob",
         age: 22,
         isMarried: true,
-        scores: 85
+        scores: 95
     },
     {
-        id: 2,
         name: "Alex",
-        age: 21,
+        age: 24,
         isMarried: true,
         scores: 89
     },
     {
-        id: 3,
+        name: "Helge",
+        age: 24,
+        isMarried: true,
+        scores: 90
+    },
+    {
         name: "Nick",
         age: 20,
         isMarried: false,
         scores: 120
     },
     {
-        id: 4,
         name: "John",
-        age: 26,
+        age: 19,
         isMarried: false,
-        scores: 100
-    }
+        scores: 121
+    },
+    {
+        name: "alex",
+        age: 22,
+        isMarried: true,
+        scores: 89
+    },
 ];
+const sortByName = (a, b) => {
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 10
+    } else {
+        return -10
+    }
+}
+// console.log(students.sort(sortByName))
+console.log(students.sort((a, b) => a.name.LocaleCompare(b.name)))
+//8.Сортировка массива обьектов по строковым значениям
 
-const names = students.map(st => st.name)
-const rNames = students.reduce((newArr, el) => {
-    newArr.push(el.name)
-    return newArr
-}, [])
-console.log(names)
-console.log(rNames)
+console.log(students.sort((a, b) => a.age - b.age))
+//9.Сортировка массива обьектов по числовым значением
+
+//bubble sort  //temp копия(стакан для переливания)
+
+const nums_2 = [100, 333, 999, 77, -3]
+// так не правильно, нужно будет копировать данный код
+// for (let i = 0; i< nums_2.length; i++) {
+//     if(nums_2[i] > nums_2[i+1]) {
+//         let temp = nums_2[i+1]
+//         nums_2[i+1]=nums_2[i+1]
+//         nums_2[i+1]=temp
+//     }
+// }
+// так  правильно
+// for (let j = 0; j < nums_2.length; j++) {
+//     for (let i = 0; i < nums_2.length; i++) {
+//         if(nums_2[i] > nums_2[i + 1]){
+//             let temp = nums_2[i + 1]
+//             nums_2[i + 1] = nums_2[i]
+//             nums_2[i] = temp
+//         }
+//     }
+// }
+let count = 0
+let replace = 0
+//-1 , -j (оптимизация) в данном коде на 105 строке
+for (let j = 0; j < nums_2.length - 1; j++) {
+    // let isSorted = true
+    for (let i = 0; i < nums_2.length - 1 - j; i++) {
+        count++
+        if (nums_2[i] > nums_2[i + 1]) {
+            replace++
+            // let temp = nums_2[i + 1]
+            // nums_2[i + 1] = nums_2[i]
+            // nums_2[i] = temp
+            [nums_2[i],nums_2[i+1]]= [nums_2[i+1],nums_2[i]]
+            //современный метод
+            // let isSorted = false
+        }
+    }
+    // if (isSorted) break
+}
+//count(счетчик)
+console.log(count)
+console.log(replace)
+console.log(nums_2)
